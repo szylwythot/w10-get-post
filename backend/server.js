@@ -1,8 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-
-const server = http.createServer((req, res) => {
+const serverFunc = (req, res) => {
 
 	const errorHTML = `
 		
@@ -61,7 +60,9 @@ const server = http.createServer((req, res) => {
 		});
 	}
 	});
-});
+};
+
+const server = http.createServer(serverFunc);
 
 server.listen(9000, "127.0.0.1", () => {
     const addr = server.address();
