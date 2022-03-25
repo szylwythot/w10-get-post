@@ -7,9 +7,9 @@ const serverFunc = (req, res) => {
     
 	let filePath = path.resolve(`${__dirname}/../frontend${req.url}`);
     
-	fs.access(filePath, fs.constants.R_OK, (err) => {
-        if(err){
-            res.statusCode = 404;
+	fs.access(filePath, fs.constants.R_OK, (error) => {
+        if(error){
+            res.statusCode = 500
             res.end(errorHTML);
         }else{
             if(fs.statSync(filePath).isDirectory()) {
@@ -20,6 +20,7 @@ const serverFunc = (req, res) => {
                     res.statusCode = 500;
                     res.end(errorHTML);
                 } else {
+                    console.log("az index.html redben kiszolgálódott");
                     res.end(data);
                 }
             });
